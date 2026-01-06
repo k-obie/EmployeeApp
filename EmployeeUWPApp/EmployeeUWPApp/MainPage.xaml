@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="EmployeeUWPApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:e="using:EmployeeComponent"
+    xmlns:local="using:EmployeeUWPApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Windows10FallCreatorsUpdate="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+        <RelativePanel>
+            <ListView Name="EmployeesList"
+                      SelectionMode="Single"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.IsVerticalRailEnabled="True"
+                      ScrollViewer.VerticalScrollMode="Enabled"
+                      ScrollViewer.HorizontalScrollMode="Enabled"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.IsHorizontalRailEnabled="True"
+                      Margin="20"
+                      CanDragItems="True">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal"  >
+                            <TextBlock Text="Id" Margin="8,0" Width="50" Foreground="DarkRed" />
+                            <TextBlock Text="First Name" Width="300" Foreground="DarkRed" />
+                            <TextBlock Text="Last Name" Width="200" Foreground="DarkRed" />
+                            <TextBlock Text="Annual Salary" Width="150" Foreground="DarkRed" />
+                            <TextBlock Text="Gender" Width="80" Foreground="DarkRed" />
+                            <TextBlock Text="IsManager" Width="80" Foreground="DarkRed" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="e:EmployeeViewModel">
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock
+                                        Text="{x:Bind Id}"
+                                        Width="50" />
+                            <TextBlock
+                                        Text="{x:Bind FirstName, Mode=OneWay}"
+                                        Width="300" />
+                            <TextBlock Text="{x:Bind LastName}"
+                                       Width="200" />
+                            <TextBlock Text="{x:Bind AnnualSalary}"
+                                       Width="150" />
+                            <TextBlock Text="{x:Bind Gender}"
+                                       Width="80" />
+                            <TextBlock Text="{x:Bind IsManager}"
+                                       Width="80" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBox x:Name="txtFirstName" Margin="280" Text="" PlaceholderText="First Name" TextWrapping="NoWrap" Background="#66A24545" Foreground="White"/>
+            <Button x:Name="btnChangeFirstName" Content="Change First Name" Margin="375,280" Command="{x:Bind ChangeFirstNameCommand}" CommandParameter="{x:Bind EmployeesList}"/>
+
+        </RelativePanel>
+    </Grid>
+</Page>
